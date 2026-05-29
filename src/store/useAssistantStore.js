@@ -12,7 +12,7 @@
 
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
-import { appConfig, DEFAULT_AVATAR, getAvatar, getPersonality } from "@/configs";
+import { appConfig, DEFAULT_AVATAR, DEFAULT_LANG, getAvatar, getPersonality } from "@/configs";
 
 export const EMOTIONS = {
   IDLE: "idle",
@@ -41,6 +41,7 @@ export const useAssistantStore = create(
     (set, get) => ({
       // --- persisted ---
       avatarId: DEFAULT_AVATAR,
+      lang: DEFAULT_LANG,
       muted: false,
       messages: [greetingMessage(DEFAULT_AVATAR)],
 
@@ -60,6 +61,9 @@ export const useAssistantStore = create(
           listening: false,
         });
       },
+
+      // --- language ---
+      setLang: (lang) => set({ lang }),
 
       // --- audio prefs ---
       toggleMute: () => set((s) => ({ muted: !s.muted })),
@@ -125,6 +129,7 @@ export const useAssistantStore = create(
       // Only persist durable fields; runtime flags reset on each load.
       partialize: (s) => ({
         avatarId: s.avatarId,
+        lang: s.lang,
         muted: s.muted,
         messages: s.messages,
       }),

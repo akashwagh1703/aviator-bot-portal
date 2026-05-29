@@ -2,25 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Default theme tokens (overridden at runtime by the theme engine). */
+/* Default theme tokens — Agri light (overridden at runtime by the theme engine). */
 :root {
-  --base: 14 13 26;
-  --base-2: 20 18 38;
-  --surface: 30 27 56;
-  --border: 255 255 255;
-  --accent: 139 92 246;
-  --accent-2: 232 121 249;
-  --text: 245 243 255;
-  --muted: 166 160 196;
-  --glow: 139 92 246;
-  --brand-gradient: linear-gradient(135deg, #8b5cf6 0%, #d946ef 55%, #f472b6 100%);
+  --base: 247 245 238;
+  --base-2: 240 242 233;
+  --surface: 255 255 255;
+  --border: 26 43 31;
+  --accent: 46 125 50;
+  --accent-2: 249 168 37;
+  --text: 27 43 31;
+  --muted: 90 107 93;
+  --glow: 46 125 50;
+  --brand-gradient: linear-gradient(135deg, #2e7d32 0%, #43a047 55%, #f9a825 100%);
 
   --radius: 1.5rem;
 }
 
 @layer base {
   * {
-    border-color: rgb(var(--border) / 0.08);
+    border-color: rgb(var(--border) / 0.1);
   }
   html,
   body {
@@ -31,13 +31,14 @@
     background-color: rgb(var(--base));
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
-    transition: background-color 0.7s ease, color 0.7s ease;
+    transition: background-color 0.6s ease, color 0.6s ease;
+    /* Larger base font for outdoor readability / low-literacy comfort. */
+    font-size: 17px;
   }
   ::selection {
-    background: rgb(var(--accent) / 0.3);
+    background: rgb(var(--accent) / 0.2);
     color: rgb(var(--text));
   }
-  /* Visible focus styles for keyboard users. */
   :focus-visible {
     outline: 2px solid rgb(var(--accent));
     outline-offset: 2px;
@@ -45,36 +46,21 @@
 }
 
 @layer components {
-  /* Primary glass surface used across cards/panels. */
-  .glass {
-    position: relative;
-    background: linear-gradient(
-      160deg,
-      rgb(var(--surface) / 0.55) 0%,
-      rgb(var(--base-2) / 0.4) 100%
-    );
-    border: 1px solid rgb(var(--border) / 0.08);
-    backdrop-filter: blur(20px) saturate(140%);
-    -webkit-backdrop-filter: blur(20px) saturate(140%);
-    box-shadow: 0 20px 50px -24px rgb(0 0 0 / 0.7),
-      inset 0 1px 0 rgb(var(--border) / 0.06);
+  /* Card surface — clean white with soft, trustworthy shadow. */
+  .card {
+    background: rgb(var(--surface));
+    border: 1px solid rgb(var(--border) / 0.1);
+    box-shadow: 0 1px 2px rgb(var(--border) / 0.04),
+      0 14px 36px -20px rgb(var(--border) / 0.28);
   }
-  /* Subtle highlight along the top edge of glass cards. */
-  .glass::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 1px;
-    background: linear-gradient(
-      180deg,
-      rgb(var(--border) / 0.12),
-      transparent 40%
-    );
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
+  /* Alias kept so existing markup still resolves; light variant. */
+  .glass {
+    background: rgb(var(--surface) / 0.85);
+    border: 1px solid rgb(var(--border) / 0.1);
+    backdrop-filter: blur(12px) saturate(120%);
+    -webkit-backdrop-filter: blur(12px) saturate(120%);
+    box-shadow: 0 1px 2px rgb(var(--border) / 0.04),
+      0 14px 36px -20px rgb(var(--border) / 0.28);
   }
 
   .text-gradient {
@@ -84,47 +70,62 @@
     color: transparent;
   }
 
-  /* Animated ambient background (aurora blobs + subtle grid). */
+  /* Token-based subtle surfaces/borders that work on the light theme. */
+  .surface-1 {
+    background-color: rgb(var(--border) / 0.04);
+  }
+  .surface-2 {
+    background-color: rgb(var(--border) / 0.07);
+  }
+  .hairline {
+    border: 1px solid rgb(var(--border) / 0.1);
+  }
+
+  /* Soft ambient background: gentle accent blobs on warm paper. */
   .aurora {
     position: fixed;
     inset: 0;
     z-index: -10;
     overflow: hidden;
-    background:
-      radial-gradient(120% 120% at 0% 0%, rgb(var(--base-2)) 0%, rgb(var(--base)) 55%);
-    transition: background 0.7s ease;
+    background: linear-gradient(180deg, rgb(var(--base-2)) 0%, rgb(var(--base)) 60%);
+    transition: background 0.6s ease;
   }
   .aurora::before,
   .aurora::after {
     content: "";
     position: absolute;
-    width: 55vw;
-    height: 55vw;
+    width: 50vw;
+    height: 50vw;
     border-radius: 9999px;
     filter: blur(120px);
-    opacity: 0.4;
+    opacity: 0.18;
     background: rgb(var(--accent));
-    animation: float-blob 20s ease-in-out infinite;
+    animation: float-blob 22s ease-in-out infinite;
   }
   .aurora::before {
-    top: -12%;
-    left: -8%;
+    top: -14%;
+    left: -10%;
   }
   .aurora::after {
-    bottom: -18%;
-    right: -10%;
+    bottom: -16%;
+    right: -12%;
     background: rgb(var(--accent-2));
-    animation-delay: -10s;
+    animation-delay: -11s;
   }
-  /* Faint dotted grid overlay for depth. */
+  /* Faint field-row texture for subtle agricultural character. */
   .grid-overlay {
     position: fixed;
     inset: 0;
     z-index: -9;
     pointer-events: none;
-    background-image: radial-gradient(rgb(var(--border) / 0.05) 1px, transparent 1px);
-    background-size: 28px 28px;
-    mask-image: radial-gradient(100% 80% at 50% 0%, #000 30%, transparent 100%);
+    background-image: repeating-linear-gradient(
+      180deg,
+      rgb(var(--border) / 0.025) 0px,
+      rgb(var(--border) / 0.025) 1px,
+      transparent 1px,
+      transparent 40px
+    );
+    mask-image: radial-gradient(120% 70% at 50% 100%, #000 20%, transparent 100%);
   }
 }
 
@@ -134,25 +135,25 @@
     transform: translate(0, 0) scale(1);
   }
   50% {
-    transform: translate(7%, 9%) scale(1.18);
+    transform: translate(6%, 8%) scale(1.15);
   }
 }
 
 /* Slim, themed scrollbars. */
 .scroll-area {
   scrollbar-width: thin;
-  scrollbar-color: rgb(var(--border) / 0.18) transparent;
+  scrollbar-color: rgb(var(--border) / 0.25) transparent;
 }
 .scroll-area::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
+  width: 8px;
+  height: 8px;
 }
 .scroll-area::-webkit-scrollbar-thumb {
-  background: rgb(var(--border) / 0.18);
+  background: rgb(var(--border) / 0.2);
   border-radius: 9999px;
 }
 .scroll-area::-webkit-scrollbar-thumb:hover {
-  background: rgb(var(--border) / 0.3);
+  background: rgb(var(--border) / 0.32);
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,35 +1,32 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.25"/>
-      <stop offset="100%" stop-color="#3b82f6" stop-opacity="0.1"/>
+      <stop offset="0%" stop-color="#0288D1" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#43A047" stop-opacity="0.12"/>
     </linearGradient>
     <linearGradient id="shell" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#e8eef7"/>
-      <stop offset="55%" stop-color="#c3cedd"/>
-      <stop offset="100%" stop-color="#9aa7bd"/>
+      <stop offset="0%" stop-color="#f1f5f9"/>
+      <stop offset="55%" stop-color="#d4dde7"/>
+      <stop offset="100%" stop-color="#aebccb"/>
     </linearGradient>
     <linearGradient id="glow" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#22d3ee"/>
-      <stop offset="100%" stop-color="#3b82f6"/>
+      <stop offset="0%" stop-color="#0288D1"/>
+      <stop offset="100%" stop-color="#43A047"/>
     </linearGradient>
   </defs>
   <circle cx="120" cy="120" r="92" fill="url(#bg)"/>
-  <line x1="120" y1="36" x2="120" y2="58" stroke="#8a98ad" stroke-width="5" stroke-linecap="round"/>
+  <line x1="120" y1="36" x2="120" y2="58" stroke="#9aa8b8" stroke-width="5" stroke-linecap="round"/>
   <circle cx="120" cy="32" r="7" fill="url(#glow)"/>
-  <rect x="108" y="158" width="24" height="20" rx="8" fill="#aab6c8"/>
   <path d="M70 224c0-30 22-50 50-50s50 20 50 50z" fill="url(#shell)"/>
   <circle cx="120" cy="206" r="9" fill="url(#glow)" opacity="0.9"/>
-  <rect x="56" y="104" width="12" height="34" rx="6" fill="#aab6c8"/>
-  <rect x="172" y="104" width="12" height="34" rx="6" fill="#aab6c8"/>
+  <rect x="56" y="104" width="12" height="34" rx="6" fill="#aebccb"/>
+  <rect x="172" y="104" width="12" height="34" rx="6" fill="#aebccb"/>
   <rect x="64" y="62" width="112" height="104" rx="34" fill="url(#shell)"/>
-  <rect x="64" y="62" width="112" height="104" rx="34" fill="none" stroke="#22d3ee" stroke-width="1.5" opacity="0.5"/>
-  <rect x="78" y="86" width="84" height="46" rx="22" fill="#0b1422"/>
-  <rect x="78" y="86" width="84" height="46" rx="22" fill="none" stroke="#22d3ee" stroke-width="1.5" opacity="0.7"/>
+  <rect x="78" y="86" width="84" height="46" rx="22" fill="#0c2233"/>
   <circle cx="102" cy="109" r="9" fill="url(#glow)"/>
   <circle cx="138" cy="109" r="9" fill="url(#glow)"/>
-  <rect x="92" y="142" width="56" height="18" rx="7" fill="#0b1422"/>
-  <g fill="#22d3ee">
+  <rect x="92" y="142" width="56" height="18" rx="7" fill="#0c2233"/>
+  <g fill="#0288D1">
     <rect x="100" y="146" width="4.5" height="10" rx="2"/>
     <rect x="109" y="144" width="4.5" height="14" rx="2"/>
     <rect x="118" y="147" width="4.5" height="8" rx="2"/>

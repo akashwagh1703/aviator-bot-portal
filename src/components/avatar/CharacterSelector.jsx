@@ -25,7 +25,7 @@ export default function CharacterSelector({ onSwitch }) {
   };
 
   return (
-    <div className="grid grid-cols-3 gap-2 sm:gap-3" role="tablist" aria-label="Choose a character">
+    <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-2.5" role="tablist" aria-label="Choose a character">
       {avatars.map((a) => {
         const activeChar = a.id === avatarId;
         return (
@@ -39,10 +39,10 @@ export default function CharacterSelector({ onSwitch }) {
             className={cn(
               "group relative flex flex-col items-center gap-2 rounded-2xl border p-3 text-center transition focus:outline-none focus-visible:ring-2 focus-visible:ring-accent",
               activeChar
-                ? "border-white/20 bg-white/10"
-                : "border-white/10 bg-white/[0.03] hover:border-white/20 hover:bg-white/[0.07]"
+                ? "border-[rgb(var(--border)/0.16)] bg-[rgb(var(--surface))] shadow-md"
+                : "border-[rgb(var(--border)/0.1)] surface-1 hover:surface-2"
             )}
-            style={activeChar ? { boxShadow: `0 10px 30px -12px ${a.accent}` } : undefined}
+            style={activeChar ? { boxShadow: `0 12px 28px -14px ${a.accent}` } : undefined}
           >
             {activeChar && (
               <span
@@ -53,16 +53,26 @@ export default function CharacterSelector({ onSwitch }) {
                 <Check className="h-2.5 w-2.5" strokeWidth={3} />
               </span>
             )}
-            <span
-              className="h-11 w-11 rounded-full ring-2 ring-white/15 transition group-hover:ring-white/25"
-              style={{ background: `linear-gradient(135deg, ${a.accent}, ${a.accent2})` }}
-              aria-hidden="true"
-            />
+            {a.render === "image" && a.image ? (
+              <span
+                className="grid h-12 w-12 place-items-center overflow-hidden rounded-full ring-2 ring-[rgb(var(--border)/0.1)]"
+                style={{ background: `linear-gradient(135deg, ${a.accent}22, ${a.accent2}22)` }}
+                aria-hidden="true"
+              >
+                <img src={a.image} alt="" className="h-full w-full object-cover" draggable={false} />
+              </span>
+            ) : (
+              <span
+                className="h-12 w-12 rounded-full ring-2 ring-[rgb(var(--border)/0.1)] transition"
+                style={{ background: `linear-gradient(135deg, ${a.accent}, ${a.accent2})` }}
+                aria-hidden="true"
+              />
+            )}
             <span className="flex flex-col leading-tight">
-              <span className={cn("text-sm font-semibold", activeChar ? "text-ink" : "text-ink/80")}>
+              <span className={cn("text-sm font-bold", activeChar ? "text-ink" : "text-ink/80")}>
                 {a.name}
               </span>
-              <span className="text-[10px] text-ink/40">{a.tagline}</span>
+              <span className="text-[11px] text-ink/45">{a.tagline}</span>
             </span>
           </motion.button>
         );

@@ -14,7 +14,7 @@
 import { useEffect, useRef, useState } from "react";
 import { getRenderer } from "./index";
 
-export default function AvatarEngine({ renderKey, accent, accent2, emotion, speaking }) {
+export default function AvatarEngine({ renderKey, accent, accent2, emotion, speaking, image }) {
   const [blink, setBlink] = useState(false);
   const [mouthOpen, setMouthOpen] = useState(0);
   const rafRef = useRef(null);
@@ -61,5 +61,15 @@ export default function AvatarEngine({ renderKey, accent, accent2, emotion, spea
     return () => cancelAnimationFrame(rafRef.current);
   }, [speaking]);
 
-  return <Renderer accent={accent} accent2={accent2} blink={blink} mouthOpen={mouthOpen} emotion={emotion} />;
+  return (
+    <Renderer
+      accent={accent}
+      accent2={accent2}
+      blink={blink}
+      mouthOpen={mouthOpen}
+      emotion={emotion}
+      speaking={speaking}
+      image={image}
+    />
+  );
 }

@@ -1,74 +1,69 @@
 /**
- * Theme configuration.
+ * Theme configuration — "Agri" light themes for a farmer audience.
  *
- * Themes are fully config-driven. Each theme exposes a cohesive set of design
- * tokens as "R G B" strings (so they compose with Tailwind's <alpha-value>),
- * plus gradient/glow strings. The active theme is applied at runtime by writing
- * these tokens to CSS variables on <html>, so adding a theme never requires
- * touching component code.
+ * Design goals: bright & sunlight-readable, warm and trustworthy, high contrast
+ * (WCAG-AA friendly). Themes are fully config-driven via CSS variables written
+ * to <html> at runtime.
  *
- * Palette principles:
- *  - a deep, near-neutral base for a premium dark UI
- *  - a slightly lifted surface for cards/panels
- *  - two harmonious accents per theme that form the brand gradient
- *  - high-contrast text + a muted variant for secondary copy
+ * Tokens are "R G B" strings so they compose with Tailwind's <alpha-value>.
+ *  - --base / --base-2 : warm off-white page background
+ *  - --surface         : white cards
+ *  - --border          : DARK ink used at LOW alpha for borders/overlays
+ *                        (keeps subtle separators visible on a light bg)
+ *  - --accent          : primary brand color (drives buttons, rings)
+ *  - --accent-2        : call-to-action / harvest accent
+ *  - --text / --muted  : primary + secondary text
  */
 
+const LIGHT_BASE = {
+  "--base": "247 245 238", // warm off-white
+  "--base-2": "240 242 233",
+  "--surface": "255 255 255",
+  "--border": "26 43 31", // deep green-ink, used at low alpha
+  "--text": "27 43 31", // #1B2B1F
+  "--muted": "90 107 93", // #5A6B5D
+};
+
 export const themes = {
-  // Sophia — Aurora: violet → fuchsia on deep indigo.
-  modern: {
-    id: "modern",
-    name: "Aurora",
+  // Kisan Mitra — Crop Green (primary brand).
+  green: {
+    id: "green",
+    name: "Kisan",
     tokens: {
-      "--base": "14 13 26",
-      "--base-2": "20 18 38",
-      "--surface": "30 27 56",
-      "--border": "255 255 255",
-      "--accent": "139 92 246",
-      "--accent-2": "232 121 249",
-      "--text": "245 243 255",
-      "--muted": "166 160 196",
+      ...LIGHT_BASE,
+      "--accent": "46 125 50", // #2E7D32
+      "--accent-2": "249 168 37", // #F9A825 harvest gold
     },
-    gradient: "linear-gradient(135deg, #8b5cf6 0%, #d946ef 55%, #f472b6 100%)",
-    glow: "139 92 246",
+    gradient: "linear-gradient(135deg, #2E7D32 0%, #43A047 55%, #F9A825 100%)",
+    glow: "46 125 50",
   },
-  // RobotX — Quantum: cyan → blue on deep slate.
-  cyber: {
-    id: "cyber",
-    name: "Quantum",
+  // AgroBot — Sky/Water (data & weather).
+  sky: {
+    id: "sky",
+    name: "Agro",
     tokens: {
-      "--base": "8 14 24",
-      "--base-2": "12 21 36",
-      "--surface": "18 30 50",
-      "--border": "255 255 255",
-      "--accent": "34 211 238",
-      "--accent-2": "59 130 246",
-      "--text": "236 246 252",
-      "--muted": "148 170 190",
+      ...LIGHT_BASE,
+      "--accent": "2 136 209", // #0288D1
+      "--accent-2": "67 160 71", // #43A047
     },
-    gradient: "linear-gradient(135deg, #22d3ee 0%, #38bdf8 50%, #3b82f6 100%)",
-    glow: "34 211 238",
+    gradient: "linear-gradient(135deg, #0288D1 0%, #29B6F6 55%, #43A047 100%)",
+    glow: "2 136 209",
   },
-  // Neo — Ember: amber → rose on warm dark plum.
-  sunset: {
-    id: "sunset",
-    name: "Ember",
+  // Fasal — Harvest Gold (energetic helper).
+  gold: {
+    id: "gold",
+    name: "Fasal",
     tokens: {
-      "--base": "22 13 18",
-      "--base-2": "33 18 25",
-      "--surface": "48 26 35",
-      "--border": "255 255 255",
-      "--accent": "251 146 60",
-      "--accent-2": "244 63 94",
-      "--text": "253 244 240",
-      "--muted": "201 168 162",
+      ...LIGHT_BASE,
+      "--accent": "245 124 0", // #F57C00
+      "--accent-2": "67 160 71", // #43A047
     },
-    gradient: "linear-gradient(135deg, #fbbf24 0%, #fb7185 55%, #f43f5e 100%)",
-    glow: "251 146 60",
+    gradient: "linear-gradient(135deg, #F9A825 0%, #F57C00 55%, #43A047 100%)",
+    glow: "245 124 0",
   },
 };
 
-export const DEFAULT_THEME = "modern";
+export const DEFAULT_THEME = "green";
 
 export function getTheme(id) {
   return themes[id] || themes[DEFAULT_THEME];

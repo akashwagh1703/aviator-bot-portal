@@ -12,8 +12,8 @@ import { motion } from "framer-motion";
  *  - emotion:   string   -> expression tweaks (e.g. smile)
  */
 export default function HumanRenderer({
-  accent = "#d946ef",
-  accent2 = "#8b5cf6",
+  accent = "#2E7D32",
+  accent2 = "#F9A825",
   blink,
   mouthOpen = 0,
   emotion,
@@ -33,13 +33,13 @@ export default function HumanRenderer({
           <stop offset="0%" stopColor="#ffe7d4" />
           <stop offset="100%" stopColor="#f6bd9b" />
         </linearGradient>
-        <linearGradient id="hr-hair" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor={accent2} />
-          <stop offset="100%" stopColor={accent} />
-        </linearGradient>
         <linearGradient id="hr-cloth" x1="0" y1="0" x2="1" y2="1">
           <stop offset="0%" stopColor={accent} />
           <stop offset="100%" stopColor={accent2} />
+        </linearGradient>
+        <linearGradient id="hr-hat" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor={accent2} />
+          <stop offset="100%" stopColor={accent} />
         </linearGradient>
       </defs>
 
@@ -53,8 +53,8 @@ export default function HumanRenderer({
       {/* neck */}
       <rect x="106" y="150" width="28" height="30" rx="12" fill="#f0ad88" />
 
-      {/* hair back */}
-      <path d="M58 118c0-44 27-72 62-72s62 28 62 72c0 18-5 32-5 32l-12-26-14 8-13-10-18 10-14-8-12 26S58 136 58 118z" fill="url(#hr-hair)" />
+      {/* hair (natural dark) */}
+      <path d="M64 116c0-40 25-66 56-66s56 26 56 66c0 12-3 22-3 22l-9-22-12 6-12-9-16 9-12-6-9 22S64 128 64 116z" fill="#4a3320" />
 
       {/* face */}
       <path d="M74 116c0-30 20-50 46-50s46 20 46 50c0 34-22 58-46 58s-46-24-46-58z" fill="url(#hr-skin)" />
@@ -94,8 +94,11 @@ export default function HumanRenderer({
       />
       <motion.ellipse cx="120" cy="142" rx="10" fill="#a83452" animate={{ ry: mouthRy }} transition={{ duration: 0.08 }} />
 
-      {/* hair front bangs */}
-      <path d="M66 112c2-40 25-66 54-66s52 26 54 66c-12-16-26-20-26-20s-9 11-28 11-28-11-28-11-13 4-26 20z" fill="url(#hr-hair)" />
+      {/* farmer hat (band + dome + brim) */}
+      <ellipse cx="120" cy="70" rx="78" ry="18" fill="url(#hr-hat)" />
+      <ellipse cx="120" cy="70" rx="78" ry="18" fill="#000" opacity="0.08" />
+      <path d="M70 70c0-30 22-46 50-46s50 16 50 46c-14-9-31-13-50-13s-36 4-50 13z" fill="url(#hr-hat)" />
+      <rect x="84" y="60" width="72" height="9" rx="4" fill="#000" opacity="0.12" />
     </svg>
   );
 }

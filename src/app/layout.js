@@ -5,13 +5,13 @@ import { ToastProvider } from "@/components/ui/Toast";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 
 export const metadata = {
-  title: `${process.env.NEXT_PUBLIC_APP_NAME || "Aether AI"} — AI Avatar Assistant`,
+  title: `${process.env.NEXT_PUBLIC_APP_NAME || "Kisan Saathi"} — AI Farming Assistant`,
   description:
-    "A modern, config-driven AI avatar assistant that talks, animates and responds with AI. Built with Next.js, Tailwind and Framer Motion.",
+    "A friendly, voice-first AI farming assistant for farmers. Ask about weather, crops, market prices and government schemes in your language.",
 };
 
 export const viewport = {
-  themeColor: "#09090f",
+  themeColor: "#2E7D32",
   width: "device-width",
   initialScale: 1,
 };

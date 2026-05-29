@@ -1,22 +1,29 @@
 "use client";
 
 /**
- * ChatInput — text field + send button + voice input.
+ * ChatInput — text field + send button + prominent voice input.
  *
  * Enter sends (Shift+Enter for newline). Auto-grows up to a max height. The
- * send button is disabled while a response is streaming.
+ * send button is disabled while a response is streaming. Placeholder + speech
+ * locale follow the selected language.
  */
 
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { SendHorizonal } from "lucide-react";
 import VoiceInput from "./VoiceInput";
+import { useAssistantStore } from "@/store/useAssistantStore";
+import { getLanguage, getStrings } from "@/configs";
 import { cn } from "@/lib/utils";
 
-export default function ChatInput({ accent = "#8b5cf6", disabled, onSend, onVoiceError }) {
+export default function ChatInput({ accent = "#2E7D32", disabled, onSend, onVoiceError }) {
   const [value, setValue] = useState("");
   const [focused, setFocused] = useState(false);
   const taRef = useRef(null);
+
+  const lang = useAssistantStore((s) => s.lang);
+  const t = getStrings(lang);
+  const speechLang = getLanguage(lang).speechLang;
 
   const submit = (text) => {
     const content = (text ?? value).trim();
@@ -43,15 +50,20 @@ export default function ChatInput({ accent = "#8b5cf6", disabled, onSend, onVoic
   return (
     <div
       className={cn(
-        "flex items-end gap-2 rounded-2xl border bg-white/[0.03] p-2 transition",
-        focused ? "border-white/25 bg-white/[0.06]" : "border-white/10"
+        "flex items-end gap-2 rounded-2xl border bg-[rgb(var(--surface))] p-2 transition",
+        focused ? "border-[rgb(var(--border)/0.2)]" : "border-[rgb(var(--border)/0.12)]"
       )}
       style={focused ? { boxShadow: `0 0 0 3px ${accent}22` } : undefined}
     >
-      <VoiceInput disabled={disabled} onTranscript={(text) => submit(text)} onError={onVoiceError} />
+      <VoiceInput
+        lang={speechLang}
+        disabled={disabled}
+        onTranscript={(text) => submit(text)}
+        onError={onVoiceError}
+      />
 
       <label htmlFor="chat-input" className="sr-only">
-        Type your message
+        {t.placeholder}
       </label>
       <textarea
         id="chat-input"
@@ -62,8 +74,8 @@ export default function ChatInput({ accent = "#8b5cf6", disabled, onSend, onVoic
         onKeyDown={handleKeyDown}
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
-        placeholder="Ask me anything…"
-        className="max-h-[120px] flex-1 resize-none bg-transparent px-2 py-2.5 text-sm text-ink placeholder-ink/40 focus:outline-none"
+        placeholder={t.placeholder}
+        className="max-h-[120px] flex-1 resize-none bg-transparent px-2 py-2.5 text-[15px] text-ink placeholder-ink/40 focus:outline-none"
       />
 
       <motion.button

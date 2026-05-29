@@ -31,6 +31,11 @@ export const rendererRegistry = {
     type: RENDERER_TYPES.SVG,
     component: dynamic(() => import("./renderers/AnimeRenderer"), { ssr: false, loading: fallback }),
   },
+  // Pre-made illustration (SVG/PNG) loaded from a file via the `image` prop.
+  image: {
+    type: RENDERER_TYPES.SVG,
+    component: dynamic(() => import("./renderers/ImageRenderer"), { ssr: false, loading: fallback }),
+  },
 };
 
 export function getRenderer(key) {

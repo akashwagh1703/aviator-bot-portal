@@ -1,52 +1,65 @@
 /**
- * Avatar (character) configuration.
+ * Avatar (character) configuration — farming assistants.
  *
  * An avatar ties together the visual renderer, a voice, a personality and a
- * theme. The `render` field selects which renderer the avatar-engine uses, so
- * the visual implementation stays decoupled from the character data. `accent`
- * lets each character tint its own SVG independently of the active UI theme.
+ * theme. `render` selects the avatar-engine renderer; `accent`/`accent2` tint
+ * the SVG independently of the active UI theme.
  */
 
 export const avatars = [
   {
-    id: "sophia",
-    name: "Sophia",
-    tagline: "Friendly companion",
-    avatar: "/avatars/sophia.svg", // static asset (fallback / marketplace preview)
-    render: "human", // avatar-engine renderer key
-    accent: "#d946ef",
-    accent2: "#8b5cf6",
-    voice: "female-soft",
-    personality: "friendly",
-    theme: "modern",
+    id: "farmerbot",
+    name: "Farmer Bot",
+    tagline: "Smart farm companion",
+    avatar: "/avatars/farmerBot.svg",
+    image: "/avatars/farmerBot.svg", // pre-made illustration used by the image renderer
+    render: "image",
+    frame: "wide", // landscape art -> rounded card instead of a circular disc
+    accent: "#43A047",
+    accent2: "#F9A825",
+    voice: "warm-female",
+    personality: "mitra",
+    theme: "green",
   },
   {
-    id: "robotx",
-    name: "RobotX",
-    tagline: "Technical unit",
-    avatar: "/avatars/robotx.svg",
+    id: "mitra",
+    name: "Kisan Mitra",
+    tagline: "Friendly farm guide",
+    avatar: "/avatars/mitra.svg",
+    render: "human",
+    accent: "#2E7D32",
+    accent2: "#F9A825",
+    voice: "warm-female",
+    personality: "mitra",
+    theme: "green",
+  },
+  {
+    id: "agrobot",
+    name: "AgroBot",
+    tagline: "Crop & weather expert",
+    avatar: "/avatars/agrobot.svg",
     render: "robot",
-    accent: "#22d3ee",
-    accent2: "#3b82f6",
-    voice: "robot-deep",
-    personality: "technical",
-    theme: "cyber",
+    accent: "#0288D1",
+    accent2: "#43A047",
+    voice: "clear-male",
+    personality: "expert",
+    theme: "sky",
   },
   {
-    id: "neo",
-    name: "Neo",
-    tagline: "Anime sidekick",
-    avatar: "/avatars/neo.svg",
+    id: "fasal",
+    name: "Fasal",
+    tagline: "Energetic helper",
+    avatar: "/avatars/fasal.svg",
     render: "anime",
-    accent: "#fb923c",
-    accent2: "#f43f5e",
-    voice: "anime-bright",
-    personality: "energetic",
-    theme: "sunset",
+    accent: "#F57C00",
+    accent2: "#43A047",
+    voice: "bright-youth",
+    personality: "helper",
+    theme: "gold",
   },
 ];
 
-export const DEFAULT_AVATAR = "sophia";
+export const DEFAULT_AVATAR = "farmerbot";
 
 export function getAvatar(id) {
   return avatars.find((a) => a.id === id) || avatars[0];

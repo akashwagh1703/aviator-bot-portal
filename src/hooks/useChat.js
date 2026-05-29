@@ -16,7 +16,7 @@
 import { useCallback, useRef } from "react";
 import { useAssistantStore } from "@/store/useAssistantStore";
 
-export function useChat({ personality, voice, speak, muted, onError } = {}) {
+export function useChat({ personality, voice, speak, muted, langHint, onError } = {}) {
   const abortRef = useRef(null);
 
   const addMessage = useAssistantStore((s) => s.addMessage);
@@ -45,7 +45,7 @@ export function useChat({ personality, voice, speak, muted, onError } = {}) {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             messages: context,
-            system: personality?.systemPrompt,
+            system: [personality?.systemPrompt, langHint].filter(Boolean).join(" "),
           }),
           signal: controller.signal,
         });
@@ -106,6 +106,7 @@ export function useChat({ personality, voice, speak, muted, onError } = {}) {
       voice,
       speak,
       muted,
+      langHint,
       onError,
     ]
   );

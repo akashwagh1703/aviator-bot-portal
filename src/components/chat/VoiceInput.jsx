@@ -1,20 +1,20 @@
 "use client";
 
 /**
- * VoiceInput — animated mic button using browser speech recognition.
+ * VoiceInput — prominent animated mic button using browser speech recognition.
  *
- * Recognized text is auto-sent via onTranscript. Hidden when the API is
- * unsupported; surfaces permission/other errors through onError (toasts).
+ * Voice-first: recognized text is auto-sent via onTranscript. Hidden when the
+ * API is unsupported; surfaces permission/other errors through onError (toasts).
  * Listening state is mirrored to the store so the avatar reacts.
  */
 
 import { useEffect } from "react";
 import { motion } from "framer-motion";
-import { Mic, MicOff } from "lucide-react";
+import { Mic } from "lucide-react";
 import { useSpeechRecognition } from "@/hooks/useSpeechRecognition";
 import { useAssistantStore } from "@/store/useAssistantStore";
 
-export default function VoiceInput({ lang = "en-US", disabled, onTranscript, onError }) {
+export default function VoiceInput({ lang = "en-IN", disabled, onTranscript, onError }) {
   const setListening = useAssistantStore((s) => s.setListening);
 
   const { supported, listening, start, stop } = useSpeechRecognition({
@@ -23,9 +23,9 @@ export default function VoiceInput({ lang = "en-US", disabled, onTranscript, onE
     onError: (e) => {
       const code = e?.error;
       if (code === "not-allowed" || code === "service-not-allowed") {
-        onError?.("Microphone permission denied. Enable it in your browser settings.");
+        onError?.("Microphone permission denied. Please enable it in your browser settings.");
       } else if (code === "no-speech") {
-        onError?.("I didn't hear anything. Try again.");
+        onError?.("I didn't hear anything. Please try again.");
       } else if (code && code !== "aborted") {
         onError?.("Voice input failed. Please try again.");
       }
@@ -47,22 +47,27 @@ export default function VoiceInput({ lang = "en-US", disabled, onTranscript, onE
       onClick={toggle}
       disabled={disabled}
       whileTap={{ scale: 0.92 }}
-      aria-label={listening ? "Stop listening" : "Start voice input"}
+      aria-label={listening ? "Stop listening" : "Speak"}
       aria-pressed={listening}
       className={
-        "relative grid h-11 w-11 shrink-0 place-items-center rounded-full transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white/60 disabled:opacity-40 " +
-        (listening ? "bg-rose-500 text-white" : "bg-white/10 text-white/80 hover:bg-white/20")
+        "relative grid h-12 w-12 shrink-0 place-items-center rounded-2xl text-white shadow-md transition focus:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:opacity-40"
+      }
+      style={
+        listening
+          ? { background: "#E53935" }
+          : { background: "var(--brand-gradient)" }
       }
     >
       {listening && (
         <motion.span
           aria-hidden="true"
-          className="absolute inset-0 rounded-full bg-rose-500"
-          animate={{ scale: [1, 1.6], opacity: [0.5, 0] }}
+          className="absolute inset-0 rounded-2xl"
+          style={{ background: "#E53935" }}
+          animate={{ scale: [1, 1.5], opacity: [0.5, 0] }}
           transition={{ duration: 1.2, repeat: Infinity }}
         />
       )}
-      {listening ? <Mic className="relative h-5 w-5" /> : <MicOff className="relative h-5 w-5" />}
+      <Mic className="relative h-5 w-5" />
     </motion.button>
   );
 }

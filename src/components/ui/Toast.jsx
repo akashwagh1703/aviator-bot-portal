@@ -54,7 +54,7 @@ export function ToastProvider({ children }) {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 10, scale: 0.96 }}
                 transition={{ type: "spring", stiffness: 350, damping: 28 }}
-                className="pointer-events-auto flex w-full max-w-sm items-start gap-3 rounded-2xl border border-white/10 bg-black/60 px-4 py-3 text-sm text-white shadow-2xl backdrop-blur-xl"
+                className="pointer-events-auto flex w-full max-w-sm items-start gap-3 rounded-2xl border border-black/5 bg-[#1b2b1f] px-4 py-3 text-sm text-white shadow-2xl"
               >
                 <Icon
                   className={

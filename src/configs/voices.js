@@ -1,46 +1,47 @@
 /**
  * Voice configuration.
  *
- * Voices describe how the browser SpeechSynthesis engine should sound for a
- * given character. We can't guarantee a specific OS voice is installed, so each
- * voice provides a `gender` + `prefer` list of voice-name hints; the speech hook
- * picks the best available match and falls back gracefully.
+ * Voices describe how the browser SpeechSynthesis engine should sound. We can't
+ * guarantee a specific OS voice is installed, so each voice provides a `gender`
+ * + `prefer` list of voice-name hints; the speech hook picks the best available
+ * match and falls back gracefully. `lang` is overridden at runtime by the
+ * selected UI language (e.g. hi-IN) when available.
  */
 
 export const voices = {
-  "female-soft": {
-    id: "female-soft",
-    name: "Soft Female",
+  "warm-female": {
+    id: "warm-female",
+    name: "Warm Female",
     gender: "female",
-    lang: "en-US",
-    pitch: 1.15,
-    rate: 1.0,
+    lang: "en-IN",
+    pitch: 1.1,
+    rate: 0.98,
     volume: 1.0,
-    prefer: ["Samantha", "Google US English", "Microsoft Aria", "Zira", "Female"],
+    prefer: ["Heera", "Google हिन्दी", "Microsoft Swara", "Google US English", "Female"],
   },
-  "robot-deep": {
-    id: "robot-deep",
-    name: "Robotic",
+  "clear-male": {
+    id: "clear-male",
+    name: "Clear Male",
     gender: "male",
-    lang: "en-US",
-    pitch: 0.6,
-    rate: 0.92,
+    lang: "en-IN",
+    pitch: 0.95,
+    rate: 0.96,
     volume: 1.0,
-    prefer: ["Microsoft David", "Google UK English Male", "Daniel", "Male"],
+    prefer: ["Hemant", "Microsoft Madhur", "Google UK English Male", "Ravi", "Male"],
   },
-  "anime-bright": {
-    id: "anime-bright",
+  "bright-youth": {
+    id: "bright-youth",
     name: "Bright Youth",
     gender: "female",
-    lang: "en-US",
-    pitch: 1.4,
-    rate: 1.08,
+    lang: "en-IN",
+    pitch: 1.3,
+    rate: 1.04,
     volume: 1.0,
-    prefer: ["Google US English", "Microsoft Aria", "Kyoko", "Female"],
+    prefer: ["Google हिन्दी", "Microsoft Swara", "Google US English", "Female"],
   },
 };
 
-export const DEFAULT_VOICE = "female-soft";
+export const DEFAULT_VOICE = "warm-female";
 
 export function getVoice(id) {
   return voices[id] || voices[DEFAULT_VOICE];
