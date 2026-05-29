@@ -96,28 +96,47 @@ export default function AssistantApp() {
     // Lightweight placeholder until the persisted store hydrates.
     return (
       <div className="grid min-h-[100svh] place-items-center">
-        <div className="h-10 w-10 animate-spin rounded-full border-2 border-white/20 border-t-white/80" />
+        <div className="h-10 w-10 animate-spin rounded-full border-2 border-white/15 border-t-accent" />
       </div>
     );
   }
 
   return (
-    <div className="relative mx-auto flex min-h-[100svh] w-full max-w-6xl flex-col gap-4 p-4 sm:p-6">
+    <div className="mx-auto flex min-h-[100svh] w-full max-w-6xl flex-col gap-5 p-4 sm:p-6 lg:p-8">
       <Header onMuteToggle={handleMute} onReset={handleReset} />
 
-      <main className="grid flex-1 grid-cols-1 gap-4 md:grid-cols-[1fr_1.1fr] lg:gap-6">
+      <main className="grid flex-1 grid-cols-1 gap-5 md:grid-cols-[minmax(280px,0.85fr)_1.15fr] lg:gap-6">
         {/* Avatar stage */}
         <motion.section
           layout
-          className="glass relative flex flex-col items-center justify-center gap-6 rounded-3xl p-6"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="glass relative flex flex-col items-center justify-between gap-6 overflow-hidden rounded-[var(--radius)] p-6 md:sticky md:top-6 md:self-start"
           aria-label="Assistant avatar"
         >
+          {/* top accent wash */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-0 top-0 h-40 opacity-50"
+            style={{ background: "radial-gradient(80% 100% at 50% 0%, rgb(var(--accent) / 0.25), transparent 70%)" }}
+          />
           <Avatar character={character} />
-          <CharacterSelector onSwitch={handleSwitch} />
+          <div className="w-full">
+            <p className="mb-3 text-center text-xs font-medium uppercase tracking-[0.18em] text-ink/40">
+              Choose your assistant
+            </p>
+            <CharacterSelector onSwitch={handleSwitch} />
+          </div>
         </motion.section>
 
         {/* Chat panel */}
-        <section className="glass flex min-h-[60svh] flex-col gap-3 rounded-3xl p-4 sm:p-5 md:min-h-0">
+        <motion.section
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.05 }}
+          className="glass flex min-h-[62svh] flex-col gap-3 rounded-[var(--radius)] p-4 sm:p-5 md:min-h-0"
+        >
           <ChatWindow accent={character.avatar.accent} />
           <ChatInput
             accent={character.avatar.accent}
@@ -125,7 +144,7 @@ export default function AssistantApp() {
             onSend={send}
             onVoiceError={(msg) => toast(msg, "error")}
           />
-        </section>
+        </motion.section>
       </main>
     </div>
   );

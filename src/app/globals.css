@@ -4,17 +4,24 @@
 
 /* Default theme tokens (overridden at runtime by the theme engine). */
 :root {
-  --base: 9 9 18;
-  --surface: 20 20 35;
+  --base: 14 13 26;
+  --base-2: 20 18 38;
+  --surface: 30 27 56;
+  --border: 255 255 255;
   --accent: 139 92 246;
-  --accent-2: 236 72 153;
-  --text: 237 237 245;
-  --muted: 150 150 170;
+  --accent-2: 232 121 249;
+  --text: 245 243 255;
+  --muted: 166 160 196;
   --glow: 139 92 246;
-  --brand-gradient: linear-gradient(130deg, #6d28d9 0%, #db2777 50%, #7c3aed 100%);
+  --brand-gradient: linear-gradient(135deg, #8b5cf6 0%, #d946ef 55%, #f472b6 100%);
+
+  --radius: 1.5rem;
 }
 
 @layer base {
+  * {
+    border-color: rgb(var(--border) / 0.08);
+  }
   html,
   body {
     height: 100%;
@@ -23,7 +30,12 @@
     color: rgb(var(--text));
     background-color: rgb(var(--base));
     -webkit-font-smoothing: antialiased;
-    transition: background-color 0.6s ease;
+    text-rendering: optimizeLegibility;
+    transition: background-color 0.7s ease, color 0.7s ease;
+  }
+  ::selection {
+    background: rgb(var(--accent) / 0.3);
+    color: rgb(var(--text));
   }
   /* Visible focus styles for keyboard users. */
   :focus-visible {
@@ -33,44 +45,86 @@
 }
 
 @layer components {
-  /* Glassmorphism surface used across cards/panels. */
+  /* Primary glass surface used across cards/panels. */
   .glass {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    box-shadow: 0 8px 40px -12px rgba(0, 0, 0, 0.5);
+    position: relative;
+    background: linear-gradient(
+      160deg,
+      rgb(var(--surface) / 0.55) 0%,
+      rgb(var(--base-2) / 0.4) 100%
+    );
+    border: 1px solid rgb(var(--border) / 0.08);
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+    box-shadow: 0 20px 50px -24px rgb(0 0 0 / 0.7),
+      inset 0 1px 0 rgb(var(--border) / 0.06);
+  }
+  /* Subtle highlight along the top edge of glass cards. */
+  .glass::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      180deg,
+      rgb(var(--border) / 0.12),
+      transparent 40%
+    );
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
   }
 
-  /* Animated gradient background aura. */
+  .text-gradient {
+    background: var(--brand-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Animated ambient background (aurora blobs + subtle grid). */
   .aurora {
     position: fixed;
     inset: 0;
     z-index: -10;
     overflow: hidden;
-    background: rgb(var(--base));
+    background:
+      radial-gradient(120% 120% at 0% 0%, rgb(var(--base-2)) 0%, rgb(var(--base)) 55%);
+    transition: background 0.7s ease;
   }
   .aurora::before,
   .aurora::after {
     content: "";
     position: absolute;
-    width: 60vw;
-    height: 60vw;
+    width: 55vw;
+    height: 55vw;
     border-radius: 9999px;
-    filter: blur(110px);
-    opacity: 0.35;
+    filter: blur(120px);
+    opacity: 0.4;
     background: rgb(var(--accent));
-    animation: float-blob 18s ease-in-out infinite;
+    animation: float-blob 20s ease-in-out infinite;
   }
   .aurora::before {
-    top: -10%;
-    left: -10%;
+    top: -12%;
+    left: -8%;
   }
   .aurora::after {
-    bottom: -15%;
+    bottom: -18%;
     right: -10%;
     background: rgb(var(--accent-2));
-    animation-delay: -9s;
+    animation-delay: -10s;
+  }
+  /* Faint dotted grid overlay for depth. */
+  .grid-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: -9;
+    pointer-events: none;
+    background-image: radial-gradient(rgb(var(--border) / 0.05) 1px, transparent 1px);
+    background-size: 28px 28px;
+    mask-image: radial-gradient(100% 80% at 50% 0%, #000 30%, transparent 100%);
   }
 }
 
@@ -80,21 +134,25 @@
     transform: translate(0, 0) scale(1);
   }
   50% {
-    transform: translate(6%, 8%) scale(1.15);
+    transform: translate(7%, 9%) scale(1.18);
   }
 }
 
 /* Slim, themed scrollbars. */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+.scroll-area {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(var(--border) / 0.18) transparent;
 }
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
+.scroll-area::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+.scroll-area::-webkit-scrollbar-thumb {
+  background: rgb(var(--border) / 0.18);
   border-radius: 9999px;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.3);
+.scroll-area::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--border) / 0.3);
 }
 
 @media (prefers-reduced-motion: reduce) {

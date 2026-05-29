@@ -14,6 +14,9 @@ export default {
         accent2: "rgb(var(--accent-2) / <alpha-value>)",
         surface: "rgb(var(--surface) / <alpha-value>)",
         base: "rgb(var(--base) / <alpha-value>)",
+        base2: "rgb(var(--base-2) / <alpha-value>)",
+        muted: "rgb(var(--muted) / <alpha-value>)",
+        ink: "rgb(var(--text) / <alpha-value>)",
       },
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],

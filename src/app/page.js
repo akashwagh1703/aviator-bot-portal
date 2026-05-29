@@ -1,9 +1,7 @@
-import dynamic from "next/dynamic";
+import ClientRoot from "@/components/layout/ClientRoot";
 
-// The assistant is a heavy, browser-API-driven client app — load it lazily so
-// it stays out of the initial server render path.
-const AssistantApp = dynamic(() => import("@/components/layout/AssistantApp"));
-
+// The assistant is a browser-API-driven client app. It is mounted client-only
+// (see ClientRoot) to avoid any SSR/client hydration mismatch.
 export default function Home() {
-  return <AssistantApp />;
+  return <ClientRoot />;
 }

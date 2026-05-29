@@ -20,7 +20,7 @@ export default function ChatWindow({ accent }) {
 
   return (
     <div
-      className="flex-1 space-y-4 overflow-y-auto px-1 py-2 [scrollbar-width:thin]"
+      className="scroll-area flex-1 space-y-4 overflow-y-auto px-1 py-2 pr-2"
       role="log"
       aria-live="polite"
       aria-label="Conversation"

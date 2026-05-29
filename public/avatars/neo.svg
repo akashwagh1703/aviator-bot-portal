@@ -1,28 +1,39 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
   <defs>
-    <radialGradient id="anskin" cx="50%" cy="42%" r="68%">
-      <stop offset="0%" stop-color="#fff1e6"/>
-      <stop offset="100%" stop-color="#ffd9bf"/>
-    </radialGradient>
-    <linearGradient id="anhair" x1="0" y1="0" x2="1" y2="1">
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fb923c" stop-opacity="0.26"/>
+      <stop offset="100%" stop-color="#f43f5e" stop-opacity="0.12"/>
+    </linearGradient>
+    <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fff3ea"/>
+      <stop offset="100%" stop-color="#ffdcc5"/>
+    </linearGradient>
+    <linearGradient id="hair" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#fb923c"/>
       <stop offset="100%" stop-color="#f43f5e"/>
     </linearGradient>
-    <linearGradient id="aneye" x1="0" y1="0" x2="0" y2="1">
+    <linearGradient id="eye" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f43f5e"/>
+      <stop offset="100%" stop-color="#fb923c"/>
+    </linearGradient>
+    <linearGradient id="hood" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#f43f5e"/>
       <stop offset="100%" stop-color="#fb923c"/>
     </linearGradient>
   </defs>
-  <path d="M40 110c-6-44 24-78 60-78s66 34 60 78c-6-18-16-26-16-26l4 22-18-16-2 18-14-18-14 18-2-18-18 16 4-22s-10 8-16 26z" fill="url(#anhair)"/>
-  <path d="M58 96c0-30 18-50 42-50s42 20 42 50c0 34-22 58-42 58s-42-24-42-58z" fill="url(#anskin)"/>
-  <ellipse cx="74" cy="120" rx="8" ry="5" fill="#f43f5e" opacity="0.25"/>
-  <ellipse cx="126" cy="120" rx="8" ry="5" fill="#f43f5e" opacity="0.25"/>
-  <ellipse cx="82" cy="104" rx="11" ry="14" fill="#fff"/>
-  <ellipse cx="82" cy="106" rx="8" ry="11" fill="url(#aneye)"/>
-  <circle cx="79" cy="101" r="3.2" fill="#fff"/>
-  <ellipse cx="118" cy="104" rx="11" ry="14" fill="#fff"/>
-  <ellipse cx="118" cy="106" rx="8" ry="11" fill="url(#aneye)"/>
-  <circle cx="115" cy="101" r="3.2" fill="#fff"/>
-  <ellipse cx="100" cy="134" rx="11" ry="6" fill="#b83b52"/>
-  <path d="M60 92c2-30 18-48 40-48s38 18 40 48c-8-10-16-12-16-12l-6 12-8-14-10 14-10-14-8 14-6-12s-8 2-16 12z" fill="url(#anhair)"/>
+  <circle cx="120" cy="120" r="92" fill="url(#bg)"/>
+  <path d="M62 224c0-32 26-54 58-54s58 22 58 54z" fill="url(#hood)"/>
+  <rect x="108" y="156" width="24" height="26" rx="11" fill="#f3c4a6"/>
+  <path d="M58 124c-6-46 26-80 62-80s68 34 62 80c-6-18-16-26-16-26l4 22-18-16-3 18-13-18-13 18-3-18-18 16 4-22s-10 8-16 26z" fill="url(#hair)"/>
+  <path d="M76 116c0-30 20-50 44-50s44 20 44 50c0 34-22 58-44 58s-44-24-44-58z" fill="url(#skin)"/>
+  <ellipse cx="92" cy="132" rx="8" ry="5" fill="#f43f5e" opacity="0.28"/>
+  <ellipse cx="148" cy="132" rx="8" ry="5" fill="#f43f5e" opacity="0.28"/>
+  <ellipse cx="100" cy="112" rx="12" ry="15" fill="#fff"/>
+  <ellipse cx="100" cy="114" rx="9" ry="12" fill="url(#eye)"/>
+  <circle cx="96.5" cy="108" r="3.4" fill="#fff"/>
+  <ellipse cx="140" cy="112" rx="12" ry="15" fill="#fff"/>
+  <ellipse cx="140" cy="114" rx="9" ry="12" fill="url(#eye)"/>
+  <circle cx="136.5" cy="108" r="3.4" fill="#fff"/>
+  <path d="M110 144 q10 9 20 0" stroke="#b83b52" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+  <path d="M64 112c2-30 18-48 56-48s54 18 56 48c-9-11-18-13-18-13l-7 13-9-15-11 15-11-15-9 15-7-13s-9 2-18 13z" fill="url(#hair)"/>
 </svg>

@@ -11,9 +11,11 @@ import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { SendHorizonal } from "lucide-react";
 import VoiceInput from "./VoiceInput";
+import { cn } from "@/lib/utils";
 
 export default function ChatInput({ accent = "#8b5cf6", disabled, onSend, onVoiceError }) {
   const [value, setValue] = useState("");
+  const [focused, setFocused] = useState(false);
   const taRef = useRef(null);
 
   const submit = (text) => {
@@ -39,12 +41,14 @@ export default function ChatInput({ accent = "#8b5cf6", disabled, onSend, onVoic
   };
 
   return (
-    <div className="flex items-end gap-2 rounded-2xl border border-white/10 bg-black/30 p-2 backdrop-blur-xl">
-      <VoiceInput
-        disabled={disabled}
-        onTranscript={(text) => submit(text)}
-        onError={onVoiceError}
-      />
+    <div
+      className={cn(
+        "flex items-end gap-2 rounded-2xl border bg-white/[0.03] p-2 transition",
+        focused ? "border-white/25 bg-white/[0.06]" : "border-white/10"
+      )}
+      style={focused ? { boxShadow: `0 0 0 3px ${accent}22` } : undefined}
+    >
+      <VoiceInput disabled={disabled} onTranscript={(text) => submit(text)} onError={onVoiceError} />
 
       <label htmlFor="chat-input" className="sr-only">
         Type your message
@@ -56,18 +60,21 @@ export default function ChatInput({ accent = "#8b5cf6", disabled, onSend, onVoic
         value={value}
         onChange={handleInput}
         onKeyDown={handleKeyDown}
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
         placeholder="Ask me anything…"
-        className="max-h-[120px] flex-1 resize-none bg-transparent px-2 py-2.5 text-sm text-white placeholder-white/40 focus:outline-none"
+        className="max-h-[120px] flex-1 resize-none bg-transparent px-2 py-2.5 text-sm text-ink placeholder-ink/40 focus:outline-none"
       />
 
       <motion.button
         type="button"
         onClick={() => submit()}
         disabled={disabled || !value.trim()}
-        whileTap={{ scale: 0.92 }}
+        whileTap={{ scale: 0.9 }}
+        whileHover={{ scale: 1.05 }}
         aria-label="Send message"
-        className="grid h-11 w-11 shrink-0 place-items-center rounded-full text-white transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white/60 disabled:cursor-not-allowed disabled:opacity-40"
-        style={{ background: `linear-gradient(135deg, ${accent}, ${accent}cc)` }}
+        className="grid h-11 w-11 shrink-0 place-items-center rounded-xl text-white shadow-lg transition focus:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:cursor-not-allowed disabled:opacity-40"
+        style={{ background: `linear-gradient(135deg, ${accent}, ${accent}cc)`, boxShadow: `0 8px 20px -8px ${accent}` }}
       >
         <SendHorizonal className="h-5 w-5" />
       </motion.button>

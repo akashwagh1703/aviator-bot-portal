@@ -18,9 +18,10 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="font-sans antialiased">
+    <html lang="en" className={inter.variable} suppressHydrationWarning>
+      <body className="font-sans antialiased" suppressHydrationWarning>
         <div className="aurora" aria-hidden="true" />
+        <div className="grid-overlay" aria-hidden="true" />
         <ToastProvider>{children}</ToastProvider>
       </body>
     </html>

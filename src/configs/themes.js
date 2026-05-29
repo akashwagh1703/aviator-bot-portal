@@ -1,54 +1,69 @@
 /**
  * Theme configuration.
  *
- * Themes are fully config-driven. Each theme exposes a set of design tokens
- * (colors as "R G B" strings so they compose with Tailwind's <alpha-value>,
- * plus a few gradient/glow strings). The active theme is applied at runtime by
- * writing these tokens to CSS variables on <html>, so adding a new theme never
- * requires touching component code.
+ * Themes are fully config-driven. Each theme exposes a cohesive set of design
+ * tokens as "R G B" strings (so they compose with Tailwind's <alpha-value>),
+ * plus gradient/glow strings. The active theme is applied at runtime by writing
+ * these tokens to CSS variables on <html>, so adding a theme never requires
+ * touching component code.
+ *
+ * Palette principles:
+ *  - a deep, near-neutral base for a premium dark UI
+ *  - a slightly lifted surface for cards/panels
+ *  - two harmonious accents per theme that form the brand gradient
+ *  - high-contrast text + a muted variant for secondary copy
  */
 
 export const themes = {
+  // Sophia — Aurora: violet → fuchsia on deep indigo.
   modern: {
     id: "modern",
-    name: "Modern",
+    name: "Aurora",
     tokens: {
-      "--base": "9 9 18",
-      "--surface": "20 20 35",
-      "--accent": "139 92 246", // violet
-      "--accent-2": "236 72 153", // pink
-      "--text": "237 237 245",
-      "--muted": "150 150 170",
+      "--base": "14 13 26",
+      "--base-2": "20 18 38",
+      "--surface": "30 27 56",
+      "--border": "255 255 255",
+      "--accent": "139 92 246",
+      "--accent-2": "232 121 249",
+      "--text": "245 243 255",
+      "--muted": "166 160 196",
     },
-    gradient: "linear-gradient(130deg, #6d28d9 0%, #db2777 50%, #7c3aed 100%)",
+    gradient: "linear-gradient(135deg, #8b5cf6 0%, #d946ef 55%, #f472b6 100%)",
     glow: "139 92 246",
   },
+  // RobotX — Quantum: cyan → blue on deep slate.
   cyber: {
     id: "cyber",
-    name: "Cyber",
+    name: "Quantum",
     tokens: {
-      "--base": "5 12 20",
-      "--surface": "12 24 38",
-      "--accent": "34 211 238", // cyan
-      "--accent-2": "16 185 129", // emerald
-      "--text": "224 242 247",
-      "--muted": "130 160 175",
+      "--base": "8 14 24",
+      "--base-2": "12 21 36",
+      "--surface": "18 30 50",
+      "--border": "255 255 255",
+      "--accent": "34 211 238",
+      "--accent-2": "59 130 246",
+      "--text": "236 246 252",
+      "--muted": "148 170 190",
     },
-    gradient: "linear-gradient(130deg, #06b6d4 0%, #10b981 50%, #0ea5e9 100%)",
+    gradient: "linear-gradient(135deg, #22d3ee 0%, #38bdf8 50%, #3b82f6 100%)",
     glow: "34 211 238",
   },
+  // Neo — Ember: amber → rose on warm dark plum.
   sunset: {
     id: "sunset",
-    name: "Sunset",
+    name: "Ember",
     tokens: {
-      "--base": "20 8 14",
-      "--surface": "38 16 24",
-      "--accent": "251 146 60", // orange
-      "--accent-2": "244 63 94", // rose
-      "--text": "253 240 235",
-      "--muted": "190 150 140",
+      "--base": "22 13 18",
+      "--base-2": "33 18 25",
+      "--surface": "48 26 35",
+      "--border": "255 255 255",
+      "--accent": "251 146 60",
+      "--accent-2": "244 63 94",
+      "--text": "253 244 240",
+      "--muted": "201 168 162",
     },
-    gradient: "linear-gradient(130deg, #f97316 0%, #f43f5e 50%, #fb923c 100%)",
+    gradient: "linear-gradient(135deg, #fbbf24 0%, #fb7185 55%, #f43f5e 100%)",
     glow: "251 146 60",
   },
 };

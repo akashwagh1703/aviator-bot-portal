@@ -14,7 +14,7 @@ export const avatars = [
     tagline: "Friendly companion",
     avatar: "/avatars/sophia.svg", // static asset (fallback / marketplace preview)
     render: "human", // avatar-engine renderer key
-    accent: "#ec4899",
+    accent: "#d946ef",
     accent2: "#8b5cf6",
     voice: "female-soft",
     personality: "friendly",
@@ -27,7 +27,7 @@ export const avatars = [
     avatar: "/avatars/robotx.svg",
     render: "robot",
     accent: "#22d3ee",
-    accent2: "#10b981",
+    accent2: "#3b82f6",
     voice: "robot-deep",
     personality: "technical",
     theme: "cyber",
