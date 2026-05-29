@@ -53,7 +53,7 @@ export default function CharacterSelector({ onSwitch }) {
                 <Check className="h-2.5 w-2.5" strokeWidth={3} />
               </span>
             )}
-            {a.render === "image" && a.image ? (
+            {a.image ? (
               <span
                 className="grid h-12 w-12 place-items-center overflow-hidden rounded-full ring-2 ring-[rgb(var(--border)/0.1)]"
                 style={{ background: `linear-gradient(135deg, ${a.accent}22, ${a.accent2}22)` }}

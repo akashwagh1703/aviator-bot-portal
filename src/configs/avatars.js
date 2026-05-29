@@ -11,13 +11,12 @@ export const avatars = [
     id: "farmerbot",
     name: "Farmer Bot",
     tagline: "Smart farm companion",
-    avatar: "/avatars/farmerBot.svg",
-    image: "/avatars/farmerBot.svg", // pre-made illustration used by the image renderer
-    render: "image",
-    frame: "wide", // landscape art -> rounded card instead of a circular disc
+    avatar: "/avatars/farmerBot-v3.svg", // rigged source art (also used as selector thumbnail)
+    image: "/avatars/farmerBot-v3.svg",
+    render: "farmer", // fully rigged renderer with real facial animation
     accent: "#43A047",
     accent2: "#F9A825",
-    voice: "warm-female",
+    voice: "clear-male",
     personality: "mitra",
     theme: "green",
   },

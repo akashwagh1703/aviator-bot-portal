@@ -36,6 +36,11 @@ export const rendererRegistry = {
     type: RENDERER_TYPES.SVG,
     component: dynamic(() => import("./renderers/ImageRenderer"), { ssr: false, loading: fallback }),
   },
+  // Fully rigged farmer face with real mouth/eye/eyebrow animation.
+  farmer: {
+    type: RENDERER_TYPES.SVG,
+    component: dynamic(() => import("./renderers/FarmerRenderer"), { ssr: false, loading: fallback }),
+  },
 };
 
 export function getRenderer(key) {
