@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <radialGradient id="anskin" cx="50%" cy="42%" r="68%">
+      <stop offset="0%" stop-color="#fff1e6"/>
+      <stop offset="100%" stop-color="#ffd9bf"/>
+    </radialGradient>
+    <linearGradient id="anhair" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fb923c"/>
+      <stop offset="100%" stop-color="#f43f5e"/>
+    </linearGradient>
+    <linearGradient id="aneye" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f43f5e"/>
+      <stop offset="100%" stop-color="#fb923c"/>
+    </linearGradient>
+  </defs>
+  <path d="M40 110c-6-44 24-78 60-78s66 34 60 78c-6-18-16-26-16-26l4 22-18-16-2 18-14-18-14 18-2-18-18 16 4-22s-10 8-16 26z" fill="url(#anhair)"/>
+  <path d="M58 96c0-30 18-50 42-50s42 20 42 50c0 34-22 58-42 58s-42-24-42-58z" fill="url(#anskin)"/>
+  <ellipse cx="74" cy="120" rx="8" ry="5" fill="#f43f5e" opacity="0.25"/>
+  <ellipse cx="126" cy="120" rx="8" ry="5" fill="#f43f5e" opacity="0.25"/>
+  <ellipse cx="82" cy="104" rx="11" ry="14" fill="#fff"/>
+  <ellipse cx="82" cy="106" rx="8" ry="11" fill="url(#aneye)"/>
+  <circle cx="79" cy="101" r="3.2" fill="#fff"/>
+  <ellipse cx="118" cy="104" rx="11" ry="14" fill="#fff"/>
+  <ellipse cx="118" cy="106" rx="8" ry="11" fill="url(#aneye)"/>
+  <circle cx="115" cy="101" r="3.2" fill="#fff"/>
+  <ellipse cx="100" cy="134" rx="11" ry="6" fill="#b83b52"/>
+  <path d="M60 92c2-30 18-48 40-48s38 18 40 48c-8-10-16-12-16-12l-6 12-8-14-10 14-10-14-8 14-6-12s-8 2-16 12z" fill="url(#anhair)"/>
+</svg>

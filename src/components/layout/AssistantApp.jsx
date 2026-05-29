@@ -1,0 +1,132 @@
+"use client";
+
+/**
+ * AssistantApp — top-level client orchestrator.
+ *
+ * Ties together character config, theme engine, speech (TTS), chat streaming
+ * and audio management. Rendering is gated on `mounted` to avoid hydration
+ * mismatches from the persisted (localStorage) store.
+ *
+ * Audio rules enforced here:
+ *  - stop speech before switching characters
+ *  - cancel speech on unmount
+ *  - respect the mute toggle
+ */
+
+import { useEffect, useMemo, useRef, useState } from "react";
+import { motion } from "framer-motion";
+
+import Header from "./Header";
+import Avatar from "@/components/avatar/Avatar";
+import CharacterSelector from "@/components/avatar/CharacterSelector";
+import ChatWindow from "@/components/chat/ChatWindow";
+import ChatInput from "@/components/chat/ChatInput";
+import { useToast } from "@/components/ui/Toast";
+
+import { useAssistantStore } from "@/store/useAssistantStore";
+import { useSpeech } from "@/hooks/useSpeech";
+import { useChat } from "@/hooks/useChat";
+import { resolveCharacter } from "@/configs";
+import { applyTheme } from "@/lib/utils";
+
+export default function AssistantApp() {
+  const [mounted, setMounted] = useState(false);
+  const { toast } = useToast();
+
+  const avatarId = useAssistantStore((s) => s.avatarId);
+  const muted = useAssistantStore((s) => s.muted);
+  const loading = useAssistantStore((s) => s.loading);
+  const toggleMute = useAssistantStore((s) => s.toggleMute);
+  const resetConversation = useAssistantStore((s) => s.resetConversation);
+  const setSpeaking = useAssistantStore((s) => s.setSpeaking);
+
+  const character = useMemo(() => resolveCharacter(avatarId), [avatarId]);
+
+  // Speech engine — sync speaking state to the store so the avatar animates.
+  const speechWarned = useRef(false);
+  const { supported: ttsSupported, speak, cancel } = useSpeech({
+    onStart: () => setSpeaking(true),
+    onEnd: () => setSpeaking(false),
+    onError: () => toast("Voice playback failed.", "error"),
+  });
+
+  const { send } = useChat({
+    personality: character.personality,
+    voice: character.voice,
+    speak,
+    muted,
+    onError: (msg) => toast(msg, "error"),
+  });
+
+  useEffect(() => setMounted(true), []);
+
+  // Apply theme whenever the character (theme) changes.
+  useEffect(() => {
+    applyTheme(character.theme);
+  }, [character.theme]);
+
+  // Warn once if TTS isn't supported by the browser.
+  useEffect(() => {
+    if (mounted && !ttsSupported && !speechWarned.current) {
+      speechWarned.current = true;
+      toast("Voice output isn't supported in this browser. Text still works.", "info");
+    }
+  }, [mounted, ttsSupported, toast]);
+
+  // Cancel any speech when the component unmounts.
+  useEffect(() => () => cancel(), [cancel]);
+
+  const handleSwitch = () => {
+    cancel(); // stop audio before switching characters
+    setSpeaking(false);
+  };
+
+  const handleMute = () => {
+    if (!muted) cancel(); // muting should silence current speech immediately
+    toggleMute();
+  };
+
+  const handleReset = () => {
+    cancel();
+    setSpeaking(false);
+    resetConversation();
+  };
+
+  if (!mounted) {
+    // Lightweight placeholder until the persisted store hydrates.
+    return (
+      <div className="grid min-h-[100svh] place-items-center">
+        <div className="h-10 w-10 animate-spin rounded-full border-2 border-white/20 border-t-white/80" />
+      </div>
+    );
+  }
+
+  return (
+    <div className="relative mx-auto flex min-h-[100svh] w-full max-w-6xl flex-col gap-4 p-4 sm:p-6">
+      <Header onMuteToggle={handleMute} onReset={handleReset} />
+
+      <main className="grid flex-1 grid-cols-1 gap-4 md:grid-cols-[1fr_1.1fr] lg:gap-6">
+        {/* Avatar stage */}
+        <motion.section
+          layout
+          className="glass relative flex flex-col items-center justify-center gap-6 rounded-3xl p-6"
+          aria-label="Assistant avatar"
+        >
+          <Avatar character={character} />
+          <CharacterSelector onSwitch={handleSwitch} />
+        </motion.section>
+
+        {/* Chat panel */}
+        <section className="glass flex min-h-[60svh] flex-col gap-3 rounded-3xl p-4 sm:p-5 md:min-h-0">
+          <ChatWindow accent={character.avatar.accent} />
+          <ChatInput
+            accent={character.avatar.accent}
+            disabled={loading}
+            onSend={send}
+            onVoiceError={(msg) => toast(msg, "error")}
+          />
+        </section>
+      </main>
+    </div>
+  );
+}
