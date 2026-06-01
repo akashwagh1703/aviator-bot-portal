@@ -1,0 +1,130 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+
+<!-- DEFINITIONS -->
+<defs>
+  <radialGradient id="skinGrad" cx="50%" cy="40%">
+    <stop offset="0%" stop-color="#d89a5c"/>
+    <stop offset="100%" stop-color="#a86b3f"/>
+  </radialGradient>
+
+  <linearGradient id="clothWhite" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#ffffff"/>
+    <stop offset="100%" stop-color="#dcdcdc"/>
+  </linearGradient>
+
+  <linearGradient id="scarfGreen" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#9acd32"/>
+    <stop offset="100%" stop-color="#3b7d23"/>
+  </linearGradient>
+
+  <radialGradient id="eyeWhite">
+    <stop offset="0%" stop-color="#ffffff"/>
+    <stop offset="100%" stop-color="#e1e1e1"/>
+  </radialGradient>
+</defs>
+
+<!-- HEAD -->
+<g id="head">
+
+  <!-- NECK -->
+  <g id="neck">
+    <path d="M400 620 Q512 700 624 620 L624 760 Q512 820 400 760 Z" fill="url(#skinGrad)"/>
+  </g>
+
+  <!-- FACE -->
+  <g id="face">
+    <ellipse cx="512" cy="430" rx="260" ry="300" fill="url(#skinGrad)"/>
+  </g>
+
+  <!-- HAIR -->
+  <g id="hair">
+    <path d="M250 360 Q512 160 774 360 Q700 230 512 200 Q300 230 250 360 Z" fill="#111"/>
+  </g>
+
+  <!-- EARS -->
+  <g id="left_ear">
+    <ellipse cx="250" cy="430" rx="40" ry="70" fill="url(#skinGrad)"/>
+  </g>
+  <g id="right_ear">
+    <ellipse cx="774" cy="430" rx="40" ry="70" fill="url(#skinGrad)"/>
+  </g>
+
+  <!-- EYES -->
+  <g id="left_eye">
+    <ellipse cx="410" cy="420" rx="60" ry="30" fill="url(#eyeWhite)"/>
+  </g>
+  <g id="right_eye">
+    <ellipse cx="614" cy="420" rx="60" ry="30" fill="url(#eyeWhite)"/>
+  </g>
+
+  <!-- PUPILS -->
+  <g id="left_pupil">
+    <circle cx="410" cy="420" r="14" fill="#2d1b12"/>
+  </g>
+  <g id="right_pupil">
+    <circle cx="614" cy="420" r="14" fill="#2d1b12"/>
+  </g>
+
+  <!-- EYEBROWS -->
+  <g id="left_eyebrow">
+    <path d="M350 360 Q410 330 470 360" stroke="#111" stroke-width="12" fill="none"/>
+  </g>
+  <g id="right_eyebrow">
+    <path d="M554 360 Q614 330 674 360" stroke="#111" stroke-width="12" fill="none"/>
+  </g>
+
+  <!-- NOSE -->
+  <g id="nose">
+    <path d="M512 420 Q480 520 512 540 Q540 520 512 420 Z" fill="#b77b4f"/>
+  </g>
+
+  <!-- MOUTH SYSTEM -->
+  <g id="jaw">
+    <path d="M430 560 Q512 650 594 560" fill="none" stroke="#8a5a35" stroke-width="5"/>
+  </g>
+
+  <g id="mouth_inner">
+    <ellipse cx="512" cy="575" rx="65" ry="35" fill="#5a1e1e"/>
+  </g>
+
+  <g id="teeth_upper">
+    <rect x="460" y="550" width="104" height="18" rx="4" fill="#ffffff"/>
+  </g>
+
+  <g id="teeth_lower">
+    <rect x="460" y="588" width="104" height="12" rx="4" fill="#f2f2f2"/>
+  </g>
+
+  <g id="tongue">
+    <ellipse cx="512" cy="600" rx="40" ry="15" fill="#c94a4a"/>
+  </g>
+
+  <g id="upper_lip">
+    <path d="M450 555 Q512 540 574 555" fill="none" stroke="#7a4a2a" stroke-width="6"/>
+  </g>
+
+  <g id="lower_lip">
+    <path d="M450 600 Q512 625 574 600" fill="none" stroke="#7a4a2a" stroke-width="6"/>
+  </g>
+
+  <!-- FACIAL HAIR -->
+  <g id="mustache">
+    <path d="M450 540 Q512 560 574 540" stroke="#1a1a1a" stroke-width="10" fill="none"/>
+  </g>
+
+  <g id="beard">
+    <ellipse cx="512" cy="600" rx="120" ry="120" fill="#1f1f1f" opacity="0.25"/>
+  </g>
+
+</g>
+
+<!-- CLOTHES -->
+<g id="clothes">
+  <!-- Kurta -->
+  <path d="M320 760 Q512 830 704 760 L744 1024 L280 1024 Z" fill="url(#clothWhite)"/>
+  
+  <!-- Scarf -->
+  <path d="M280 700 Q512 820 744 700 Q680 760 512 800 Q344 760 280 700 Z" fill="url(#scarfGreen)"/>
+</g>
+
+</svg>

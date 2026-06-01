@@ -1,43 +1,77 @@
 /**
  * Voice configuration.
  *
- * Voices describe how the browser SpeechSynthesis engine should sound. We can't
- * guarantee a specific OS voice is installed, so each voice provides a `gender`
- * + `prefer` list of voice-name hints; the speech hook picks the best available
- * match and falls back gracefully. `lang` is overridden at runtime by the
- * selected UI language (e.g. hi-IN) when available.
+ * Primary TTS: Microsoft Edge neural voices via /api/tts (Indian locales).
+ * Fallback: browser SpeechSynthesis with scored Indian voice matching.
  */
 
 export const voices = {
   "warm-female": {
     id: "warm-female",
-    name: "Warm Female",
+    name: "Warm Female (Indian)",
     gender: "female",
     lang: "en-IN",
-    pitch: 1.1,
-    rate: 0.98,
+    provider: "edge",
+    neural: {
+      "en-IN": "en-IN-NeerjaNeural",
+      "hi-IN": "hi-IN-SwaraNeural",
+    },
+    edgeRate: "-6%",
+    edgePitch: "+2Hz",
+    pitch: 1.05,
+    rate: 0.94,
     volume: 1.0,
-    prefer: ["Heera", "Google हिन्दी", "Microsoft Swara", "Google US English", "Female"],
+    prefer: [
+      "Neerja",
+      "Swara",
+      "Heera",
+      "Microsoft Swara",
+      "Google UK English Female",
+      "Female",
+      "India",
+    ],
   },
   "clear-male": {
     id: "clear-male",
-    name: "Clear Male",
+    name: "Clear Male (Indian)",
     gender: "male",
     lang: "en-IN",
-    pitch: 0.95,
-    rate: 0.96,
+    provider: "edge",
+    neural: {
+      "en-IN": "en-IN-PrabhatNeural",
+      "hi-IN": "hi-IN-MadhurNeural",
+    },
+    edgeRate: "-8%",
+    edgePitch: "-1Hz",
+    pitch: 0.92,
+    rate: 0.92,
     volume: 1.0,
-    prefer: ["Hemant", "Microsoft Madhur", "Google UK English Male", "Ravi", "Male"],
+    prefer: [
+      "Prabhat",
+      "Madhur",
+      "Hemant",
+      "Microsoft Madhur",
+      "Google UK English Male",
+      "Male",
+      "India",
+    ],
   },
   "bright-youth": {
     id: "bright-youth",
-    name: "Bright Youth",
+    name: "Bright Youth (Indian)",
     gender: "female",
     lang: "en-IN",
-    pitch: 1.3,
-    rate: 1.04,
+    provider: "edge",
+    neural: {
+      "en-IN": "en-IN-NeerjaNeural",
+      "hi-IN": "hi-IN-SwaraNeural",
+    },
+    edgeRate: "+2%",
+    edgePitch: "+4Hz",
+    pitch: 1.15,
+    rate: 1.02,
     volume: 1.0,
-    prefer: ["Google हिन्दी", "Microsoft Swara", "Google US English", "Female"],
+    prefer: ["Neerja", "Swara", "Heera", "Microsoft Swara", "Female", "India"],
   },
 };
 

@@ -15,6 +15,7 @@
 
 import { useCallback, useRef } from "react";
 import { useAssistantStore } from "@/store/useAssistantStore";
+import { unlockAudioPlayback } from "@/lib/tts/audioUnlock";
 
 export function useChat({ personality, voice, speak, muted, langHint, onError } = {}) {
   const abortRef = useRef(null);
@@ -31,6 +32,7 @@ export function useChat({ personality, voice, speak, muted, langHint, onError } 
       const content = (text || "").trim();
       if (!content || loading) return;
 
+      void unlockAudioPlayback();
       addMessage({ role: "user", content });
       const context = getContextMessages();
       const assistantId = addMessage({ role: "assistant", content: "", streaming: true });

@@ -10,11 +10,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "bufferutil": "^4.1.0",
     "framer-motion": "^11.18.0",
     "lucide-react": "^0.474.0",
+    "msedge-tts": "^2.0.5",
     "next": "^15.5.18",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "utf-8-validate": "^6.0.6",
     "zustand": "^5.0.3"
   },
   "devDependencies": {

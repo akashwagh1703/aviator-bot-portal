@@ -25,7 +25,7 @@ export default function CharacterSelector({ onSwitch }) {
   };
 
   return (
-    <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-2.5" role="tablist" aria-label="Choose a character">
+    <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4 sm:gap-2.5" role="tablist" aria-label="Choose a character">
       {avatars.map((a) => {
         const activeChar = a.id === avatarId;
         return (
@@ -59,7 +59,12 @@ export default function CharacterSelector({ onSwitch }) {
                 style={{ background: `linear-gradient(135deg, ${a.accent}22, ${a.accent2}22)` }}
                 aria-hidden="true"
               >
-                <img src={a.image} alt="" className="h-full w-full object-cover" draggable={false} />
+                <img
+                  src={a.image || a.avatar}
+                  alt=""
+                  className="h-full w-full object-cover object-top"
+                  draggable={false}
+                />
               </span>
             ) : (
               <span

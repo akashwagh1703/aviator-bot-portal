@@ -78,6 +78,10 @@ export default function Avatar({ character }) {
             emotion={emotion}
             speaking={speaking}
             image={avatar.image}
+            video={avatar.video}
+            videoWebm={avatar.videoWebm}
+            poster={avatar.poster}
+            segments={avatar.videoSegments}
           />
         </div>
 

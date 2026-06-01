@@ -12,6 +12,7 @@ import dynamic from "next/dynamic";
 
 export const RENDERER_TYPES = {
   SVG: "svg",
+  VIDEO: "video",
   LOTTIE: "lottie", // reserved for future
   THREE: "three", // reserved for future
 };
@@ -40,6 +41,16 @@ export const rendererRegistry = {
   farmer: {
     type: RENDERER_TYPES.SVG,
     component: dynamic(() => import("./renderers/FarmerRenderer"), { ssr: false, loading: fallback }),
+  },
+  // Rigged Aviator pilot (farmerBot-v4) — mouth/blink driven by TTS.
+  aviator: {
+    type: RENDERER_TYPES.SVG,
+    component: dynamic(() => import("./renderers/AviatorRenderer"), { ssr: false, loading: fallback }),
+  },
+  // Pre-rendered talking-head clip (muted; TTS supplies audio).
+  video: {
+    type: RENDERER_TYPES.VIDEO,
+    component: dynamic(() => import("./renderers/VideoRenderer"), { ssr: false, loading: fallback }),
   },
 };
 

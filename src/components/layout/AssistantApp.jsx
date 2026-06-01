@@ -51,10 +51,11 @@ export default function AssistantApp() {
   );
 
   const speechWarned = useRef(false);
-  const { supported: ttsSupported, speak, cancel } = useSpeech({
+  const { browserSupported, speak, cancel } = useSpeech({
     onStart: () => setSpeaking(true),
     onEnd: () => setSpeaking(false),
-    onError: () => toast("Voice playback failed.", "error"),
+    onError: (err) =>
+      toast(typeof err === "string" ? err : err?.message || "Voice playback failed.", "error"),
   });
 
   const { send } = useChat({
@@ -72,11 +73,11 @@ export default function AssistantApp() {
   }, [character.theme]);
 
   useEffect(() => {
-    if (!ttsSupported && !speechWarned.current) {
+    if (!browserSupported && !speechWarned.current) {
       speechWarned.current = true;
-      toast("Voice output isn't supported in this browser. Text still works.", "info");
+      toast("Using cloud Indian voice. Browser voice fallback unavailable.", "info");
     }
-  }, [ttsSupported, toast]);
+  }, [browserSupported, toast]);
 
   useEffect(() => () => cancel(), [cancel]);
 
